@@ -6,7 +6,7 @@ Trabajo correspondiente a la asignatura DI (Desarrollo de Interfaces) pertenecie
 
 La tarea consistía en la realización de 3 ejercicios cuyos enunciados paso a detallar.
 
-##Ejercicio1. 
+## Ejercicio1. 
 Crea un informe con el nombre “Facturas” que muestre las facturas adeudadas por los clientes e informe del total emitido a cada uno de ellos al final de la última factura listada para cada cliente. El informe debe tener orden ascendente por el Número de factura, y se debe visualizar la siguiente información:
 - Número de factura
 - Nombre
