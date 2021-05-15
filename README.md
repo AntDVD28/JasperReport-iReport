@@ -1,4 +1,4 @@
-# JasperReport-iReport
+# JasperReport+iReport
 
 Generación de informes con JasperReport + iReport
 
