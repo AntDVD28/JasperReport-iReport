@@ -40,3 +40,36 @@ Crea un informe con el nombre Informe03 en el que se visualice gráficamente la 
 No debes usar ningún subinforme en este ejercicio.
 Puedes utilizar el gráfico que consideres más oportuno.
 
+## Pautas que seguí para la resolución de los ejercicios 1 y 3
+Utilicé iReport de forma independiente. Es importante conocer que iReport integra el SGBD HSQLDB
+
+1) Instalación de i-Report versión 5.6.0
+    
+    https://sourceforge.net/projects/ireport/files/iReport/
+    
+2) Lanzar el programa con permisos de administrador. Es importantísimo, sino no os funcionará.
+
+3) Iniciar la BD de pruebas. Al iniciarla estaremos arrancando el servidor HSQLDB
+
+   desde iReport -> Ayuda -> Samples -> Run Sample Database
+   
+4) Configurar la conexión a la BD de pruebas
+
+   desde iReport -> Report Datasources (icono de un cilindro con un enchufe) -> Sample Databade -> Modificar
+   
+   JDBC Driver: HSQLDB (server) (org.hsqldb.jdbcDriver)
+   JDBC URL: jdbc:hsqldb:hsql://127.0.0.1/
+   Username: sa
+   Password: (sin rellenar)
+   Save password: tildado
+   
+   Comprobar la conexión haciendo clic en el botón "Test"
+   
+5) Diseñar los diferentes informes
+   
+   
+
+
+3) 
+
+
