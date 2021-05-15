@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TotalPorCliente" language="groovy" pageWidth="420" pageHeight="842" columnWidth="420" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="67292736-7e8a-4b8b-8593-f1a4dc2b17a4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     ADDRESS."ID" AS ADDRESS_ID,
+     ADDRESS."FIRSTNAME" AS ADDRESS_FIRSTNAME,
+     ADDRESS."LASTNAME" AS ADDRESS_LASTNAME,
+     DOCUMENT."TOTAL" AS DOCUMENT_TOTAL,
+     (SELECT count(addressid) from document where addressid=ADDRESS.ID) AS NUM_FACTURAS,
+     (SELECT sum(total) from document where addressid=ADDRESS.ID) AS IMPORTE_TOTAL
+
+FROM
+     "PUBLIC"."ADDRESS" ADDRESS,
+     "PUBLIC"."DOCUMENT" DOCUMENT
+WHERE
+     Address.id = Document.id
+and (SELECT count(addressid) from document where addressid=ADDRESS.ID)>0]]>
+	</queryString>
+	<field name="ADDRESS_ID" class="java.lang.Integer"/>
+	<field name="ADDRESS_FIRSTNAME" class="java.lang.String"/>
+	<field name="ADDRESS_LASTNAME" class="java.lang.String"/>
+	<field name="DOCUMENT_TOTAL" class="java.math.BigDecimal"/>
+	<field name="NUM_FACTURAS" class="java.lang.Integer"/>
+	<field name="IMPORTE_TOTAL" class="java.math.BigDecimal"/>
+	<variable name="TOTAL_ADEUDADO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{IMPORTE_TOTAL}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="333" height="20" uuid="2a8117c1-6266-4873-aea2-b6272c5173e1"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumen de importes adeudados por clientes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement x="0" y="0" width="47" height="20" uuid="9f81b3d3-403a-45fc-9efb-89d6b2388f44"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Id cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="0" width="80" height="20" uuid="4c7e5d88-b148-44be-acfb-9b367c0f9ae7"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="0" width="103" height="20" uuid="72ada9a0-a4fb-40d8-9fe8-4df95c321d0d"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="90" height="20" uuid="fe982535-c60b-44e4-8afa-7902089f31cc"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad facturas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="100" height="20" uuid="4dfe63cc-9455-43ab-8762-89ec2023c1d7"/>
+				<textElement textAlignment="Right">
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Importe total adeudado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="14" height="20" uuid="482c2c89-21f7-41f8-a731-917e575ee59b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="0" width="80" height="20" uuid="977c64e2-cf14-4f6f-bc5f-6686f21821cb"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_FIRSTNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="0" width="103" height="20" uuid="6efe0160-8cf5-4087-b85d-b46c0dadf879"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_LASTNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="90" height="20" uuid="69448a7a-eb8d-4521-b5c1-f61a0077d8b5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NUM_FACTURAS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="85" height="20" uuid="bb2b08b3-adaf-46c5-be49-3be97ac9f4fa"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{IMPORTE_TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="405" y="0" width="15" height="20" uuid="d1a0b5f5-34cb-43ec-bac9-f2029a46eb2e"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="198" y="8" width="157" height="20" uuid="953001a5-29d5-4458-bb11-d4ad6ff73abb"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe total adeudado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="355" y="8" width="50" height="20" uuid="3a5df090-cfb9-4342-9e31-1f78f137f855"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_ADEUDADO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="405" y="8" width="15" height="20" uuid="6dbffd52-dbdc-42c3-82c8-c6c535a1df3e"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[€]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

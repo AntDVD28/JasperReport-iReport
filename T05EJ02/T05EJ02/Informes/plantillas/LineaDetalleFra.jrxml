@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LineaDetalleFra" language="groovy" pageWidth="420" pageHeight="842" columnWidth="420" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0648fd9b-59e2-4536-b5aa-741c6497de3c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * FROM positions, product WHERE positions.PRODUCTID = product.ID AND positions.DOCUMENTID=$P{DOCUMENT_ID} ORDER BY positions.positionno ASC]]>
+	</queryString>
+	<field name="DOCUMENTID" class="java.lang.Integer"/>
+	<field name="POSITIONNO" class="java.lang.Integer"/>
+	<field name="PRODUCTID" class="java.lang.Integer"/>
+	<field name="QUANTITY" class="java.lang.Integer"/>
+	<field name="PRICE" class="java.math.BigDecimal"/>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="COST" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="132" height="25" uuid="dbe9665c-3774-460b-acb2-d565b5755933"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Líneas del pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="25" width="30" height="20" uuid="d1cc488d-d146-44af-9892-76cefebd6a90"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Pos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="25" width="154" height="20" uuid="951c4b9d-212b-4dfd-b0a3-81c438e252e1"/>
+				<textElement>
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Descripción del artículo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="25" width="52" height="20" uuid="48846d5b-8ba3-438e-82ba-64d0293eb4a4"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="25" width="100" height="20" uuid="f413307b-863a-4e71-8e0a-5702d831514d"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Precio unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="25" width="74" height="20" uuid="f18fbc7e-9c8c-48fd-ab4e-7860875f07c1"/>
+				<textElement textAlignment="Right">
+					<font isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Precio línea]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="21">
+			<textField>
+				<reportElement x="4" y="0" width="15" height="20" uuid="f4e39bb9-4973-4951-9c1a-f4ec3912e0f6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{POSITIONNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="0" width="154" height="20" uuid="f4783c8f-db9e-4918-a683-deb313fec804"/>
+				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="0" width="52" height="20" uuid="e0414a5d-8057-4ddd-95ef-4910df7cb90d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{QUANTITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="100" height="20" uuid="1a1c65ec-4c30-413a-a4b3-7905e45b411d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="64" height="20" uuid="e01ac19d-0e47-40e9-8d33-a6966f37f1aa"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{PRICE}*$F{QUANTITY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="404" y="0" width="10" height="20" uuid="e2196585-1764-43c4-b80f-e2aedc7e6b83"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

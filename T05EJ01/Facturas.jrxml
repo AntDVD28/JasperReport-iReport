@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Facturas2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e2f27ebc-681d-46f5-9a1d-2e823fe2c2b0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ADDRESS."FIRSTNAME" AS ADDRESS_FIRSTNAME,
+     ADDRESS."LASTNAME" AS ADDRESS_LASTNAME,
+     ADDRESS."STREET" AS ADDRESS_STREET,
+     ADDRESS."CITY" AS ADDRESS_CITY,
+     DOCUMENT."ID" AS DOCUMENT_ID,
+     DOCUMENT."TOTAL" AS DOCUMENT_TOTAL,
+     ADDRESS."ID" AS ADDRESS_ID
+FROM
+     "PUBLIC"."ADDRESS" ADDRESS,
+     "PUBLIC"."DOCUMENT" DOCUMENT
+WHERE
+     Document.addressid = Address.id
+ORDER BY
+     Address.id ASC, Document.id]]>
+	</queryString>
+	<field name="ADDRESS_FIRSTNAME" class="java.lang.String"/>
+	<field name="ADDRESS_LASTNAME" class="java.lang.String"/>
+	<field name="ADDRESS_STREET" class="java.lang.String"/>
+	<field name="ADDRESS_CITY" class="java.lang.String"/>
+	<field name="DOCUMENT_ID" class="java.lang.Integer"/>
+	<field name="DOCUMENT_TOTAL" class="java.math.BigDecimal"/>
+	<field name="ADDRESS_ID" class="java.lang.Integer"/>
+	<variable name="DOCUMENT_TOTAL_1" class="java.math.BigDecimal" resetType="Group" resetGroup="ADDRESS_ID" calculation="Sum">
+		<variableExpression><![CDATA[$F{DOCUMENT_TOTAL}]]></variableExpression>
+	</variable>
+	<group name="ADDRESS_ID">
+		<groupExpression><![CDATA[$F{ADDRESS_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="86">
+				<textField>
+					<reportElement x="13" y="28" width="100" height="20" uuid="b3bb3f7c-291a-47fd-b1bc-5d662732fd2c"/>
+					<textFieldExpression><![CDATA[$F{ADDRESS_FIRSTNAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="113" y="28" width="100" height="20" uuid="6b81c652-701f-48e5-a475-b09ea8dd2467"/>
+					<textFieldExpression><![CDATA[$F{ADDRESS_LASTNAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="13" y="48" width="100" height="20" uuid="09593fbe-4470-49f8-85f0-e6856147bd43"/>
+					<textFieldExpression><![CDATA[$F{ADDRESS_STREET}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="113" y="48" width="100" height="20" uuid="98ed0bfe-6cbe-4a13-a5df-aff31b71758c"/>
+					<textFieldExpression><![CDATA[$F{ADDRESS_CITY}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="139" height="26" backcolor="#999999" uuid="9e87560b-e8a9-42f8-81cc-b7d5dbe957bf"/>
+					<textElement>
+						<font size="15" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Datos del cliente:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="48">
+				<staticText>
+					<reportElement x="240" y="14" width="100" height="20" uuid="8bca7b5d-3e08-460c-8d94-1f1923c0db23"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL ADEUDADO:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="340" y="14" width="64" height="20" uuid="50071558-7ca0-4146-ba09-e217f7914d57"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DOCUMENT_TOTAL_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="404" y="14" width="9" height="20" uuid="f85103ff-23cc-4dda-b280-9a484e0ed570"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[€]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="43" width="555" height="1" uuid="66a55137-8175-44f8-9146-40dd6ba34439"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="159" splitType="Stretch">
+			<staticText>
+				<reportElement x="197" y="0" width="158" height="39" uuid="1eb05c20-68e4-4072-a90f-d939211e8341"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Facturas]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="49" width="200" height="100" uuid="a9660998-59ce-4a13-ad13-cd62e6a90977"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TotalPorCliente.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<detail>
+		<band height="149" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="27" width="413" height="100" uuid="f1cd0b68-e70c-4090-a256-cc80e6ebf0ce"/>
+				<subreportParameter name="DOCUMENT_ID">
+					<subreportParameterExpression><![CDATA[$F{DOCUMENT_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "LineaDetalleFra.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement mode="Transparent" x="99" y="0" width="61" height="27" backcolor="#FFFFFF" uuid="22e23685-064c-4920-8e59-61e57d769999"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DOCUMENT_ID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="99" height="27" backcolor="#FFFFFF" uuid="13734c39-4305-4624-a608-3063e653c782"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número Factura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="301" y="129" width="39" height="20" uuid="28cc2afc-4387-4d04-8c27-1710d0a87485"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="340" y="129" width="64" height="20" uuid="f58bdd39-aafb-4df5-8901-776a04a73323"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{DOCUMENT_TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="404" y="129" width="9" height="20" uuid="34b99b4a-da80-4156-b082-2a126752424f"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="277" y="34" width="15" height="20" uuid="05bc4323-e807-439d-a1d5-52ab75c23f06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="266" y="36" width="11" height="18" uuid="dc882fb8-aa72-4510-a1bb-df3e574bcba3"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="36" width="11" height="18" uuid="eb65058a-09e0-4607-97a3-b7146d1f7ed6"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="534" height="20" uuid="f8bbaaac-d10f-4e22-966a-d00ed3e7037a"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Reporte generado por David Jiménez Riscardo para la tarea 5 correspondiente a la asignatura de DI. Año 2021]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

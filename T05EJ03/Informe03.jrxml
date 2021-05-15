@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe03" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="07e223a8-a11e-4956-bcfd-bfc1969935b6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     POSITIONS."PRODUCTID" AS POSITIONS_PRODUCTID,
+     POSITIONS."QUANTITY" AS POSITIONS_QUANTITY,
+     PRODUCT."ID" AS PRODUCT_ID,
+     PRODUCT."NAME" AS PRODUCT_NAME
+FROM
+     "PUBLIC"."POSITIONS" POSITIONS,
+     "PUBLIC"."PRODUCT" PRODUCT
+WHERE
+     productid = id
+ORDER BY
+id asc]]>
+	</queryString>
+	<field name="POSITIONS_PRODUCTID" class="java.lang.Integer"/>
+	<field name="POSITIONS_QUANTITY" class="java.lang.Integer"/>
+	<field name="PRODUCT_ID" class="java.lang.Integer"/>
+	<field name="PRODUCT_NAME" class="java.lang.String"/>
+	<variable name="POSITIONS_QUANTITY_1" class="java.lang.Integer" resetType="Group" resetGroup="PRODUCT_ID" calculation="Sum">
+		<variableExpression><![CDATA[$F{POSITIONS_QUANTITY}]]></variableExpression>
+	</variable>
+	<group name="PRODUCT_ID">
+		<groupExpression><![CDATA[$F{PRODUCT_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement x="25" y="0" width="100" height="20" uuid="a7ec5d4a-1494-41ec-af84-c7ccc76cca7b"/>
+					<textFieldExpression><![CDATA[$F{PRODUCT_ID}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="125" y="0" width="100" height="20" uuid="8187714b-d634-4236-93f3-ad1ed5dac966"/>
+					<textFieldExpression><![CDATA[$F{PRODUCT_NAME}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="PRODUCT_ID">
+					<reportElement x="225" y="0" width="100" height="20" uuid="57063064-9a01-4b70-a925-317cd65f2690"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$V{POSITIONS_QUANTITY_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="3"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="466" splitType="Stretch">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement mode="Opaque" x="0" y="0" width="802" height="466" backcolor="#CCCCCC" uuid="78b2f402-7e2f-4de1-a372-c71f3752a59c"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Unidades vendidas"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{PRODUCT_ID}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{POSITIONS_QUANTITY_1}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot orientation="Horizontal"/>
+					<itemLabel>
+						<font size="10"/>
+					</itemLabel>
+					<categoryAxisFormat>
+						<axisFormat verticalTickLabels="true">
+							<labelFont>
+								<font size="10" isItalic="false" isUnderline="false"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="0" width="100" height="20" uuid="62edaeb4-d370-41ae-8f72-fefe3dfba04e"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="0" width="100" height="20" uuid="8a3bd169-0d29-4161-b5d3-9b8f460c8af1"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Artículo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="0" width="100" height="20" uuid="075b6c25-2196-488d-b00b-4411421bb320"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Unidades vendidas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="3" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

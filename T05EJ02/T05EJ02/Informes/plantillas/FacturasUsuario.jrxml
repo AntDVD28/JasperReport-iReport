@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacturasUsuario" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eb618b7c-5f58-44c2-9a0a-f9b9270266da">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_CLIENTE" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     DOCUMENT."ID" AS DOCUMENT_ID,
+     DOCUMENT."TOTAL" AS DOCUMENT_TOTAL,
+     ADDRESS."ID" AS ADDRESS_ID,
+     ADDRESS."FIRSTNAME" AS ADDRESS_FIRSTNAME,
+     ADDRESS."LASTNAME" AS ADDRESS_LASTNAME,
+     ADDRESS."STREET" AS ADDRESS_STREET,
+     ADDRESS."CITY" AS ADDRESS_CITY
+FROM
+     "PUBLIC"."DOCUMENT" DOCUMENT,
+     "PUBLIC"."ADDRESS" ADDRESS
+WHERE
+     document.addressid =  address.id
+AND
+     address.id =  $P{ID_CLIENTE}]]>
+	</queryString>
+	<field name="DOCUMENT_ID" class="java.lang.Integer"/>
+	<field name="DOCUMENT_TOTAL" class="java.math.BigDecimal"/>
+	<field name="ADDRESS_ID" class="java.lang.Integer"/>
+	<field name="ADDRESS_FIRSTNAME" class="java.lang.String"/>
+	<field name="ADDRESS_LASTNAME" class="java.lang.String"/>
+	<field name="ADDRESS_STREET" class="java.lang.String"/>
+	<field name="ADDRESS_CITY" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="183" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="27" width="189" height="23" uuid="b1182afb-bcef-418a-aea6-2c11cbeff860"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Facturas pendientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="72" width="131" height="23" backcolor="#CCCCCC" uuid="d4631da9-f7bb-45f2-9e92-616cfaecdf87"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos del cliente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="107" width="100" height="20" uuid="7a7a42be-cf8b-4e27-857c-3d99bea0dc01"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_ID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="107" width="100" height="20" uuid="31fde03c-8ab4-48ff-9ac3-b53015ef2a6e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente número:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="127" width="100" height="20" uuid="12c1e244-1037-41a1-80dc-26556e24b41a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre y apellidos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="127" width="100" height="20" uuid="8f9ed4c7-1d60-4969-b338-585505932587"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_FIRSTNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="127" width="100" height="20" uuid="5cf8dd1f-7c38-4473-aa19-86d5e5b788a9"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_LASTNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="147" width="100" height="20" uuid="ddd9161c-0d26-48e3-bf73-e49c92eb1a4e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="147" width="100" height="20" uuid="f78e24a1-d6dd-4805-ab72-4ff7e4745281"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_STREET}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="147" width="100" height="20" uuid="7a90cc90-7ef1-458d-8dcd-710ec8f8d75e"/>
+				<textFieldExpression><![CDATA[$F{ADDRESS_CITY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="143">
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="ef8205e3-87a5-4da1-9a57-9a1674516716"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DOCUMENT_ID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="bbb49127-8cb6-470f-ba67-81be4a9846e8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Factura número:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="21" width="413" height="100" uuid="e1f75ea9-e9eb-4a98-bb84-65202c416100"/>
+				<subreportParameter name="DOCUMENT_ID">
+					<subreportParameterExpression><![CDATA[$F{DOCUMENT_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "LineaDetalleFra.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="296" y="121" width="44" height="20" uuid="ebd9dced-ac58-4d83-800b-389bd10cc306"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="340" y="121" width="64" height="20" uuid="3d661505-bcdb-415d-983b-c2c1450aa420"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DOCUMENT_TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="404" y="121" width="9" height="20" uuid="7cc3cd98-c1cb-48ab-bec7-c664aeb180b0"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[€]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="46" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="271" y="34" width="13" height="20" uuid="bbcccad1-7c49-4c48-8266-6055bd7ddaca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="36" width="11" height="18" uuid="c5019d80-7e2d-4723-887a-1c99d10f3e27"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="36" width="11" height="18" uuid="f6cdee18-9c83-414c-8fbc-69fbf90e9ca3"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="555" height="20" uuid="295dd224-13bc-49be-a25b-dad3c91e0e45"/>
+				<text><![CDATA[Reporte generado por David Jiménez Riscardo para la tarea 5 correspondiente a la asignatura de DI. Año 2021]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
