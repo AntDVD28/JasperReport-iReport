@@ -76,17 +76,17 @@ Utilicé Netbeans como IDE versión 8.2 con el JDK 1.8
    
 2) Instalación del servidor HSQLDB versión 2.5
 
-  https://sourceforge.net/projects/hsqldb/files/hsqldb/
+   https://sourceforge.net/projects/hsqldb/files/hsqldb/
   
 3) Iniciar servidor desde la línea de comandos
 
-   java -cp lib/hsqldb.jar org.hsqldb.Server -database.0 file:data/demo_db -dbname.0 xdb
+   **java -cp lib/hsqldb.jar org.hsqldb.Server -database.0 file:data/demo_db -dbname.0 xdb**
 
    Este comando sería para lanzar la BD que trae de pruebas. El comando hay que lanzarlo una vez nos ubiquemos dentro de la carpeta donde hemos instalado HSQLDB, sino el sistema    no lo reconocerá.
 
    Para iniciar la BD de la tarea hay que copiar previamente el script dentro de la carpeta data de HSQLDB y ejecutar el comando:
 
-   java -cp lib/hsqldb.jar org.hsqldb.Server -database.0 file:data/dbEjercicio -dbname.0 xdb
+   **java -cp lib/hsqldb.jar org.hsqldb.Server -database.0 file:data/dbEjercicio -dbname.0 xdb**
    
 4) Agregar las librerías necesarias al proyecto. 
    Podéis localizarlas en: C:\Program Files (x86)\Jaspersoft\iReport-5.6.0\ireport\modules\ext
