@@ -68,3 +68,37 @@ Utilicé iReport de forma independiente. Es importante conocer que iReport integ
 5) Diseñar los diferentes informes
    
 
+## Pautas que seguí para la resolución del ejercicio 2
+Utilicé Netbeans como IDE versión 8.2 con el JDK 1.8
+
+1) Diseño de las plantillas de los reports. 
+   Las hice desde iReport y posteriormente las copie dentro del proyecto. iReport puede instalarse como plugin en Netbeans, también podríamos hacerlo de este forma.
+   
+2) Instalación del servidor HSQLDB versión 2.5
+
+  https://sourceforge.net/projects/hsqldb/files/hsqldb/
+  
+3) Iniciar servidor desde la línea de comandos
+
+   java -cp lib/hsqldb.jar org.hsqldb.Server -database.0 file:data/demo_db -dbname.0 xdb
+
+   Este comando sería para lanzar la BD que trae de pruebas. El comando hay que lanzarlo una vez nos ubiquemos dentro de la carpeta donde hemos instalado HSQLDB, sino el sistema    no lo reconocerá.
+
+   Para iniciar la BD de la tarea hay que copiar previamente el script dentro de la carpeta data de HSQLDB y ejecutar el comando:
+
+   java -cp lib/hsqldb.jar org.hsqldb.Server -database.0 file:data/dbEjercicio -dbname.0 xdb
+   
+4) Agregar las librerías necesarias al proyecto. 
+   Podéis localizarlas en: C:\Program Files (x86)\Jaspersoft\iReport-5.6.0\ireport\modules\ext
+   
+   Yo necesité:
+   - commons-collections
+   - common-digister
+   - common-logging (esta no es necesaria, pero creo que si el sistema os falla os facilita información al respecto)
+   - groovy-all (esta no viene en el temario pero Netbeans a mí me la pidió)
+   - hsqldb
+   - iText
+   - jasperreports
+   - spring
+
+5) Desarrollar el código necesario para completar los requerimientos del ejercicio planteado
