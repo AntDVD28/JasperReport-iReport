@@ -57,19 +57,14 @@ Utilicé iReport de forma independiente. Es importante conocer que iReport integ
 
    desde iReport -> Report Datasources (icono de un cilindro con un enchufe) -> Sample Databade -> Modificar
    
-   JDBC Driver: HSQLDB (server) (org.hsqldb.jdbcDriver)
-   JDBC URL: jdbc:hsqldb:hsql://127.0.0.1/
-   Username: sa
-   Password: (sin rellenar)
-   Save password: tildado
+   - JDBC Driver: HSQLDB (server) (org.hsqldb.jdbcDriver)
+   - JDBC URL: jdbc:hsqldb:hsql://127.0.0.1/
+   - Username: sa
+   - Password: (sin rellenar)
+   - Save password: tildado
    
    Comprobar la conexión haciendo clic en el botón "Test"
    
 5) Diseñar los diferentes informes
    
-   
-
-
-3) 
-
 
