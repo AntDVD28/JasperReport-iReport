@@ -18,9 +18,9 @@ La tarea consistía en la realización de 3 ejercicios cuyos enunciados paso a d
   - Cantidad
   - Precio unitario
   - Precio total
-  - Importe total por factura
-  - Importe total facturas adeudadas por cliente
-  - 
+- Importe total por factura
+- Importe total facturas adeudadas por cliente
+  
 Además, para favorecer la lectura, debe incluirse al principio del informe un resumen, utilizando subreporte (con el nombre TotalPorCliente), que muestre la siguiente información:
 - Id cliente
 - Nombre
